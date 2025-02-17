@@ -1,9 +1,11 @@
 #!/bin/bash
 
-package="MathTheme.tar.gz"
+source paths.conf
+
+package="${THEME_NAME}.tar.gz"
 
 if [ -e "$package" ]; then
-    rm $package
+    rm "$package"
 fi
 
-tar -czvf "$package" --exclude="$package" --exclude=make_package.sh *
+tar -czvf "$package" "${THEME_FILES[@]}"
