@@ -1,3 +1,4 @@
+#!/bin/bash
 
 package="MathTheme.tar.gz"
 
