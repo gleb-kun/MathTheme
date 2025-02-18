@@ -3,7 +3,6 @@
 source paths.conf
 
 THEME_PATH="$GRUB_THEMES_DIR/$THEME_NAME"
-THEME_LINE="GRUB_THEME=$THEME_PATH/theme.txt"
 
 if [[ $EUID -ne 0 ]]; then
     echo "This script requires superuser privileges (sudo)."

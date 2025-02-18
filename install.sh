@@ -2,7 +2,7 @@
 
 source paths.conf
 
-THEME_LINE="GRUB_THEME=$THEME_PATH/theme.txt"
+THEME_LINE="GRUB_THEME=$GRUB_THEMES_DIR/$THEME_NAME/theme.txt"
 
 if [[ $EUID -ne 0 ]]; then
     echo "This script requires superuser privileges (sudo)."
@@ -21,18 +21,21 @@ fi
 if [ -d "$GRUB_THEMES_DIR/$THEME_NAME" ]; then
     echo "Theme $THEME_NAME is already installed. No changes made."
     exit 0
+else
+    mkdir -p "$GRUB_THEMES_DIR/$THEME_NAME"
 fi
 
-for item in "${FILES_TO_COPY[@]}"; do
+for item in "${THEME_FILES[@]}"; do
     if [ -e "$THEME_DIR/$item" ]; then
-        cp -r "$THEME_DIR/$item" "$GRUB_THEMES_DIR/$THEME_NAME/"
+        cp -r "$THEME_DIR/$item" "$GRUB_THEMES_DIR/$THEME_NAME/$item"
     fi
 done
 
-if grep -q "^GRUB_THEME=" "$GRUB_CONFIG"; then
-    sed -i "s|^GRUB_THEME=.*|$THEME_LINE|" "$GRUB_CONFIG"
+sed -i '/^[^#]*GRUB_THEME/d' "$GRUB_CONFIG"
+if grep -q "^#GRUB_THEME" "$GRUB_CONFIG"; then
+    sed -i "/^#GRUB_THEME=/a $THEME_LINE" "$GRUB_CONFIG"
 else
-    echo "$THEME_LINE" | tee -a "$GRUB_CONFIG" > /dev/null
+    echo "$THEME_LINE" >> "$GRUB_CONFIG"
 fi
 
 grub-mkconfig -o /boot/grub/grub.cfg
