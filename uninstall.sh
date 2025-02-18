@@ -16,8 +16,6 @@ fi
 
 rm -rf "$THEME_PATH"
 
-echo "Theme $THEME_NAME has been removed."
-
 if grep -q "^GRUB_THEME=" "$GRUB_CONFIG"; then
     sed -i "/^GRUB_THEME=/d" "$GRUB_CONFIG"
     echo "Removed GRUB_THEME entry from $GRUB_CONFIG."
@@ -26,3 +24,4 @@ fi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 echo "GRUB configuration updated."
+echo "Theme $THEME_NAME has been removed."
