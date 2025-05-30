@@ -15,6 +15,8 @@ Only GNU GRUB bootloader is required.
 For installation use the script **install.sh**.
 This script requires superuser privileges (sudo).
 
+❗ Tested for ArchLinux only.
+
 ```shell
 sudo ./install.sh
 ```
@@ -41,6 +43,8 @@ As a result, we get an archive (**MathTheme.tar.gz**) that can be imported, for 
 ## Screenshot
 
 ![](screenshot.png)
+
+The background artist is [Kuldar Leement](https://kuldarleement.eu/).
 
 ## Copyright
 
